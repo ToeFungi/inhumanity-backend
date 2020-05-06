@@ -4,8 +4,13 @@
   "description": "Backend service for the inhumanity app",
   "main": "src/index.ts",
   "scripts": {
+    "build": "tsc",
     "test": "mocha",
-    "watch:dev": "nodemon"
+    "start": "node build/index.js",
+    "heroku-postbuild": "npm run build",
+    "watch:dev": "nodemon -w src/index.ts",
+    "coverage": "nyc --reporter=lcov mocha",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -25,19 +30,29 @@
   },
   "homepage": "https://github.com/ToeFungi/inhumanity-backend#readme",
   "devDependencies": {
-    "@types/chai": "^4.2.11",
-    "@types/express": "^4.17.6",
-    "@types/mocha": "^7.0.2",
-    "@types/node": "^13.13.5",
-    "@types/sinon": "^9.0.0",
-    "chai": "^4.2.0",
-    "mocha": "^7.1.2",
-    "nodemon": "^2.0.3",
-    "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0",
-    "typescript": "^3.8.3"
+    "@types/chai": "4.2.11",
+    "@types/chai-as-promised": "7.1.2",
+    "@types/express": "4.17.6",
+    "@types/mocha": "7.0.2",
+    "@types/node": "13.13.5",
+    "@types/sinon": "9.0.0",
+    "@types/sinon-chai": "3.2.4",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "mocha": "7.1.2",
+    "nodemon": "2.0.3",
+    "nyc": "15.0.1",
+    "sinon": "9.0.2",
+    "sinon-chai": "3.5.0",
+    "ts-node": "8.6.2",
+    "tslint": "6.1.2",
+    "tslint-config-standard": "9.0.0",
+    "typescript": "3.8.3"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "4.17.1"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
