@@ -35,7 +35,7 @@ jobs:
         - npm run coverage
     - stage: sonar
       script:
-        - sonar-scanner -X
+        - sonar-scanner
       addons:
         sonarcloud:
           organization: "skaleb"
