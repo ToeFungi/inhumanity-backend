@@ -1,0 +1,51 @@
+language: node_js
+
+node_js:
+  - "12"
+
+cache:
+  directories:
+    - "build"
+    - "coverage"
+    - "node_modules"
+    - "$HOME/.sonar/cache"
+
+stages:
+  - setup
+  - audit
+  - lint
+  - test
+  - sonar
+  - build
+  - deploy
+
+jobs:
+  include:
+    - stage: setup
+      script:
+        - npm i
+    - stage: audit
+      script:
+        - npm audit
+    - stage: lint
+      script:
+        - npm run lint
+    - stage: test
+      script:
+        - npm run coverage
+    - stage: sonar
+      script:
+        - sonar-scanner
+      addons:
+        sonarcloud:
+          organization: "skaleb"
+          token: "$SONAR_API_KEY"
+    - stage: build
+      script:
+        - npm run build
+    - stage: deploy
+      deploy:
+        provider: heroku
+        api_key: "$HEROKU_API_KEY"
+        app: "inhumanity-backend-service"
+        skip_cleanup: true

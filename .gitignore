@@ -3,7 +3,10 @@ node_modules/
 
 # Artifacts
 dist/
-.nyc_coverage/
+build/
+coverage/
+.nyc_output/
+.scannerwork/
 
 # IDE
 .idea/
