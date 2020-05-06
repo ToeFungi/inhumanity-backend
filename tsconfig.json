@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
     "module": "commonjs",
+    "target": "es2019",
     "sourceMap": true,
-    "esModuleInterop": true
+    "outDir": "build"
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
+    "test",
     "node_modules"
   ]
 }
