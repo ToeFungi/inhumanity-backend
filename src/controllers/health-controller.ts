@@ -16,7 +16,7 @@ class HealthController extends Controller {
    */
   public setRoutes(): void {
     this.logger.info('Setting up routes for controller')
-    this.router.get('/health', this.getHealth.bind(this))
+    this.router.get('/', this.getHealth.bind(this))
   }
 
   /**
