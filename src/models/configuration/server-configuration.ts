@@ -5,7 +5,7 @@ interface ServerConfiguration {
   /**
    * The port for the server to listen on
    */
-  port: number
+  port: string
 }
 
 export { ServerConfiguration }
