@@ -8,7 +8,7 @@ const configuration: AppConfiguration = {
     logglySubdomain: process.env.LOGGER_LOGGLY_SUBDOMAIN
   },
   server: {
-    port: +process.env.PORT
+    port: process.env.PORT
   }
 }
 
