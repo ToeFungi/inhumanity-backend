@@ -1,6 +1,6 @@
 {
   "name": "inhumanity-backend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Backend service for the inhumanity app",
   "main": "src/index.ts",
   "scripts": {
@@ -37,6 +37,7 @@
     "@types/mocha": "7.0.2",
     "@types/node": "13.13.5",
     "@types/sinon": "9.0.0",
+    "@types/uuid": "3.4.9",
     "@types/sinon-chai": "3.2.4",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
@@ -45,14 +46,20 @@
     "nyc": "15.0.1",
     "sinon": "9.0.2",
     "sinon-chai": "3.5.0",
-    "sonar-scanner": "^3.1.0",
+    "sonar-scanner": "3.1.0",
     "ts-node": "8.6.2",
     "tslint": "6.1.2",
     "tslint-config-standard": "9.0.0",
     "typescript": "3.8.3"
   },
   "dependencies": {
-    "express": "4.17.1"
+    "@types/bunyan": "1.8.6",
+    "bunyan": "1.8.12",
+    "bunyan-loggly": "1.4.2",
+    "express": "4.17.1",
+    "express-http-context": "1.2.3",
+    "node-mocks-http": "1.8.1",
+    "uuid": "3.4.0"
   },
   "engines": {
     "node": "12.x"

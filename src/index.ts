@@ -1,13 +1,30 @@
-import * as express from 'express'
+import { configuration } from './configuration'
+import { AppFactory } from './factories/app-factory'
+import { ExpressServer } from './services/express-server'
+import { LoggerFactory } from './factories/logger-factory'
+import { HealthController } from './controllers/health-controller'
 
-const server = express()
+/**
+ * Start the HTTP service
+ */
+const startService = () => {
+  // Logging
+  const loggerFactory = new LoggerFactory(configuration.logger)
+  const processLogger = loggerFactory.getNamedLogger('inhumanity-backend')
 
-const port = process.env.PORT || 3000
+  // Controllers
+  const healthController = new HealthController(loggerFactory)
 
-const healthListener = (request: express.Request, response: express.Response) => {
-  return response.status(200)
-    .send('healthy')
+  // Application
+  const app = AppFactory.getInstance(healthController)
+  const expressServer = new ExpressServer(app, loggerFactory, configuration.server)
+
+  const handleError = (error: Error) => processLogger.error('Process error', { message: error.message })
+
+  expressServer.run()
+    .catch(handleError)
 }
 
-server.get('/health', healthListener)
-  .listen(port, () => console.log('listening on port', { port }))
+Promise.resolve()
+  .then(startService)
+  .catch(console.error)
