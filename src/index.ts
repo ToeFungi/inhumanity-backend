@@ -1,25 +1,30 @@
-import * as express from 'express'
-import * as HTTPContext from 'express-http-context'
-
 import { configuration } from './configuration'
+import { AppFactory } from './factories/app-factory'
+import { ExpressServer } from './services/express-server'
 import { LoggerFactory } from './factories/logger-factory'
-import { CorrelationIdMiddleware } from './middleware/correlation-id-middleware'
+import { HealthController } from './controllers/health-controller'
 
-const server = express()
-  .use(HTTPContext.middleware)
-  .use(CorrelationIdMiddleware.getMiddleware())
+/**
+ * Start the HTTP service
+ */
+const startService = () => {
+  // Logging
+  const loggerFactory = new LoggerFactory(configuration.logger)
+  const processLogger = loggerFactory.getNamedLogger('inhumanity-backend')
 
-const loggerFactory = new LoggerFactory(configuration.logger)
-const logger = loggerFactory.getNamedLogger('application')
+  // Controllers
+  const healthController = new HealthController(loggerFactory)
 
-const healthListener = (request: express.Request, response: express.Response) => {
-  logger.debug('health listener endpoint reached', { status: 200 })
-  return response.status(200)
-    .send('healthy')
+  // Application
+  const app = AppFactory.getInstance(healthController)
+  const expressServer = new ExpressServer(app, loggerFactory, configuration.server)
+
+  const handleError = (error: Error) => processLogger.error('Process error', { message: error.message })
+
+  expressServer.run()
+    .catch(handleError)
 }
 
-server.get('/health', healthListener)
-
-server.listen(configuration.server.port, () => logger.info('Listening on specified port', {
-  port: configuration.server.port
-}))
+Promise.resolve()
+  .then(startService)
+  .catch(console.error)
