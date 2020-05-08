@@ -1,6 +1,6 @@
 {
   "name": "inhumanity-backend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Backend service for the inhumanity app",
   "main": "src/index.ts",
   "scripts": {
