@@ -6,6 +6,15 @@ Date format is YYYY/MM/DD
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2020/05/19
+### Added
+- Database factory, configuration and Mongo connection
+- CODEOWNERS and PR template
+
+## Updated
+- CI flow to run specific jobs in parallel
+- README to include badges and basic info
+
 ## [0.1.1] - 2020/05/09
 ### Added
 - Initial commit
