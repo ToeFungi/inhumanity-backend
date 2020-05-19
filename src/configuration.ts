@@ -9,6 +9,13 @@ const configuration: AppConfiguration = {
   },
   server: {
     port: process.env.PORT
+  },
+  database: {
+    url: process.env.DATABASE_URL,
+    name: process.env.DATABASE_NAME,
+    engine: process.env.DATABASE_ENGINE,
+    username: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD
   }
 }
 
