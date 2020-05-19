@@ -12,7 +12,8 @@ cache:
 
 stages:
   - setup
-  - quality
+  - audit-lint-coverage
+  - sonar
   - build
   - deploy
 
@@ -22,14 +23,16 @@ jobs:
       script:
         - npm i
 
-    - stage: quality
+    - stage: audit-lint-coverage
       script: npm audit
       name: audit
     - script: npm run lint
       name: lint
     - script: npm run coverage
       name: coverage
-    - script: sonar-scanner
+
+    - stage: sonar
+      script: sonar-scanner
       name: sonar
       addons:
         sonarcloud:
