@@ -58,7 +58,7 @@
     "mongodb": "3.5.3",
     "bunyan": "1.8.12",
     "bunyan-loggly": "1.4.2",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "express-http-context": "1.2.3",
     "node-mocks-http": "1.8.1",
     "uuid": "3.4.0"
